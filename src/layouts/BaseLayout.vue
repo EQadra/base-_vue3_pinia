@@ -28,9 +28,22 @@
               <ChevronDown v-else-if="sidebarStore.isOpen" size="20" />
             </button>
             <div v-if="module.open && module.options.length" class="ml-6 space-y-2 my-1">
-              <button v-for="option in module.options" :key="option" class="w-full p-2 rounded-md dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-blue-700">
-                {{ option }}
-              </button>
+              <template v-for="option in module.options" :key="option">
+  <router-link
+    v-if="module.name === 'Roles' && option === 'Lista'"
+    to="/roles"
+    class="block w-full p-2 rounded-md dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-blue-700"
+  >
+    {{ option }}
+  </router-link>
+  <button
+    v-else
+    class="w-full p-2 rounded-md dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-blue-700"
+  >
+    {{ option }}
+  </button>
+</template>
+
             </div>
           </div>
         </nav>
