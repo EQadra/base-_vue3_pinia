@@ -8,8 +8,11 @@ import NotFoundView from '../views/auth/NotFoundView.vue'
 
 // Layout y vistas internas
 import BaseLayout from '../layouts/BaseLayout.vue'
-import DataTableView from '../views/DataTableView.vue'
-// import ProfileView from '../views/ProfileView.vue'
+import DataTableView from '../views/DataTableView.vue'  
+import RolesView from '../views/RolesView.vue'
+import PermissionsView from '../views/PermissionsView.vue'
+
+
 
 const routes = [
   // Auth routes (sin layout)
@@ -24,6 +27,24 @@ const routes = [
     component: BaseLayout,
     children: [
       { path: '', component: DataTableView },
+      // { path: 'profile', component: ProfileView }
+      // Aquí puedes seguir agregando rutas internas protegidas
+    ]
+  },
+  {
+    path: '/roles',
+    component: BaseLayout,
+    children: [
+      { path: '', component: RolesView },
+      // { path: 'profile', component: ProfileView }
+      // Aquí puedes seguir agregando rutas internas protegidas
+    ]
+  },
+  {
+    path: '/permisos',
+    component: BaseLayout,
+    children: [
+      { path: '', component: PermissionsView },
       // { path: 'profile', component: ProfileView }
       // Aquí puedes seguir agregando rutas internas protegidas
     ]
