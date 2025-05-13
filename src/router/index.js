@@ -8,9 +8,15 @@ import NotFoundView from '../views/auth/NotFoundView.vue'
 
 // Layout y vistas internas
 import BaseLayout from '../layouts/BaseLayout.vue'
-import DataTableView from '../views/DataTableView.vue'  
+import DataTableView from '../views/UsersView.vue'  
 import RolesView from '../views/RolesView.vue'
 import PermissionsView from '../views/PermissionsView.vue'
+
+// Layout y vistas internas
+import AsiciactionView from '../views/app/AsiciactionView.vue'
+import DoctorView from '../views/app/DoctorView.vue'  
+import LawyersView from '../views/app/LawyerView.vue'
+import StoresView from '../views/app/StoreView.vue'
 
 
 
@@ -49,6 +55,46 @@ const routes = [
       // Aquí puedes seguir agregando rutas internas protegidas
     ]
   },
+
+  //
+  {
+    path: '/doctors',
+    component: BaseLayout,
+    children: [
+      { path: '', component: DoctorView },
+      // { path: 'profile', component: ProfileView }
+      // Aquí puedes seguir agregando rutas internas protegidas
+    ]
+  },
+  {
+    path: '/lawyers',
+    component: BaseLayout,
+    children: [
+      { path: '', component: LawyersView },
+      // { path: 'profile', component: ProfileView }
+      // Aquí puedes seguir agregando rutas internas protegidas
+    ]
+  },
+  {
+    path: '/asociations',
+    component: BaseLayout,
+    children: [
+      { path: '', component: AsiciactionView },
+      // { path: 'profile', component: ProfileView }
+      // Aquí puedes seguir agregando rutas internas protegidas
+    ]
+  },
+  {
+    path: '/stores',
+    component: BaseLayout,
+    children: [
+      { path: '', component: StoresView },
+      // { path: 'profile', component: ProfileView }
+      // Aquí puedes seguir agregando rutas internas protegidas
+    ]
+  },
+
+
 
   // Ruta 404
   { path: '/:pathMatch(.*)*', component: NotFoundView }

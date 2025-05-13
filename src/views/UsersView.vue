@@ -32,6 +32,16 @@
         <button @click="deleteUser(id)" title="Eliminar">🗑️</button>
       </template>
     </EasyDataTable>
+
+    <!-- Charts Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+      <div class="chart-container">
+        <Bar :data="barChartData" :options="barChartOptions" />
+      </div>
+      <div class="chart-container">
+        <Pie :data="pieChartData" :options="pieChartOptions" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -41,6 +51,71 @@ import Swal from 'sweetalert2'
 import EasyDataTable from 'vue3-easy-data-table'
 import 'vue3-easy-data-table/dist/style.css'
 
+// Chart.js
+import { Bar, Pie } from 'vue-chartjs'
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  ArcElement,
+  CategoryScale,
+  LinearScale
+} from 'chart.js'
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, ArcElement, CategoryScale, LinearScale)
+
+// Datos y opciones para los gráficos
+const barChartData = computed(() => ({
+  labels: users.value.map(u => u.name),
+  datasets: [
+    {
+      label: 'Usuarios',
+      data: users.value.map(() => Math.floor(Math.random() * 10 + 1)),
+      backgroundColor: '#3f51b5'
+    }
+  ]
+}))
+
+const barChartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: { position: 'top' },
+    title: {
+      display: true,
+      text: 'Usuarios por nombre',
+      font: { size: 14 }
+    }
+  }
+}
+
+const pieChartData = computed(() => ({
+  labels: ['Activos', 'Inactivos'],
+  datasets: [
+    {
+      label: 'Estado',
+      data: [users.value.length - 1, 1],
+      backgroundColor: ['#4caf50', '#f44336']
+    }
+  ]
+}))
+
+const pieChartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: { position: 'bottom' },
+    title: {
+      display: true,
+      text: 'Estados de usuarios',
+      font: { size: 14 }
+    }
+  }
+}
+
+// Lista de usuarios
 const users = ref([
   { id: 1, name: 'Ana Pérez', email: 'ana@example.com' },
   { id: 2, name: 'Carlos López', email: 'carlos@example.com' },
@@ -187,5 +262,10 @@ button {
 
 button:hover {
   opacity: 0.7;
+}
+
+.chart-container {
+  height: 300px;
+  width: 100%;
 }
 </style>
